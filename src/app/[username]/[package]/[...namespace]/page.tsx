@@ -1,6 +1,6 @@
 import { FC, ReactNode } from "react";
-import { Item, ModuleDoc, Variant } from "@/documentation";
 import Markdown from "react-markdown";
+import type { Item, ModuleDoc, Variant } from "kestrel-lang";
 
 const ItemCard: FC<{
   id: string;
@@ -106,7 +106,14 @@ const ModuleInfo: FC<{
       <h1 className="text-4xl text-pink-800 font-bold font-mono">
         {moduleDoc.moduleName}
       </h1>
-      <div className="h-8" />
+
+      {moduleDoc.moduleDoc === undefined ? null : (
+        <div className="mt-3 prose">
+          <Markdown>{moduleDoc.moduleDoc}</Markdown>
+        </div>
+      )}
+
+      <div className="h-10" />
       <div className="flex flex-col gap-y-6">
         {moduleDoc.items.map((item) => viewItem(item))}
       </div>

@@ -2,6 +2,7 @@ import { ModulesSideBar } from "@/components/ModulesSidebar";
 import Link from "next/link";
 import { FC, ReactNode } from "react";
 import { Bars3Icon } from "@heroicons/react/24/outline";
+import type { ProjectDoc } from "kestrel-lang";
 
 type Params = {
   username: string;
@@ -31,7 +32,7 @@ export default async function Layout({
   params: Params;
   children: ReactNode;
 }) {
-  const json = await fetch(
+  const json: ProjectDoc = await fetch(
     `https://raw.githubusercontent.com/${username}/${package_}/main/docs.json`
   ).then((r) => r.json());
 
