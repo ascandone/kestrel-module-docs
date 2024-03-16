@@ -1,5 +1,4 @@
 import Markdown from "react-markdown";
-import { ModulesSideBar } from "@/components/ModulesSidebar";
 
 type Params = {
   username: string;
