@@ -3,11 +3,12 @@ import { Item, ModuleDoc, Variant } from "@/documentation";
 import Markdown from "react-markdown";
 
 const ItemCard: FC<{
+  id: string;
   children: ReactNode;
   docComment?: string;
-}> = ({ children, docComment }) => {
+}> = ({ children, docComment, id }) => {
   return (
-    <div>
+    <div id={id}>
       <h2
         className={`
         text-pink-800 font-sans font-medium
@@ -45,6 +46,12 @@ const showVariants = (variants: Variant[]) => {
     .join(",\n");
 };
 
+const Name: FC<{ name: string }> = ({ name }) => (
+  <a href={`#${name}`} className="font-bold text-pink-950 hover:underline">
+    {name}
+  </a>
+);
+
 const TypeDoc: FC<{ item: Item & { type: "adt" } }> = ({ item }) => {
   const hasParams = item.params.length !== 0;
   const params = hasParams ? `<${item.params.join(", ")}>` : null;
@@ -55,8 +62,8 @@ const TypeDoc: FC<{ item: Item & { type: "adt" } }> = ({ item }) => {
       : ` {\n${showVariants(item.variants)}\n}`;
 
   return (
-    <ItemCard docComment={item.docComment}>
-      type <span className="font-bold text-pink-950">{item.name}</span>
+    <ItemCard docComment={item.docComment} id={item.name}>
+      type <Name name={item.name} />
       {params}
       {contructors}
     </ItemCard>
@@ -68,8 +75,8 @@ const ValueDoc: FC<{ item: Item & { type: "value" } }> = ({ item }) => {
   const name = needsParens ? `(${item.name})` : item.name;
 
   return (
-    <ItemCard docComment={item.docComment}>
-      <span className="font-bold text-pink-950">{name}</span> : {item.signature}
+    <ItemCard docComment={item.docComment} id={item.name}>
+      <Name name={item.name} /> : {item.signature}
     </ItemCard>
   );
 };
