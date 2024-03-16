@@ -1,5 +1,5 @@
 import { FC, ReactNode } from "react";
-import { Item, ModuleDoc, ProjectDoc } from "@/documentation";
+import { Item, ModuleDoc, Variant } from "@/documentation";
 import Markdown from "react-markdown";
 
 const ItemCard: FC<{
@@ -28,14 +28,37 @@ const ItemCard: FC<{
   );
 };
 
+const showVariants = (variants: Variant[]) => {
+  if (variants.length === 0) {
+    return "{ }";
+  }
+
+  return variants
+    .map((variant) => {
+      if (variant.args.length === 0) {
+        return `${variant.name}`;
+      }
+      const args = variant.args.map((arg) => arg).join(", ");
+      return `${variant.name}(${args})`;
+    })
+    .map((v) => `  ${v}`)
+    .join(",\n");
+};
+
 const TypeDoc: FC<{ item: Item & { type: "adt" } }> = ({ item }) => {
   const hasParams = item.params.length !== 0;
   const params = hasParams ? `<${item.params.join(", ")}>` : null;
+
+  const contructors =
+    item.variants === undefined
+      ? null
+      : ` {\n${showVariants(item.variants)}\n}`;
 
   return (
     <ItemCard docComment={item.docComment}>
       type {item.name}
       {params}
+      {contructors}
     </ItemCard>
   );
 };
