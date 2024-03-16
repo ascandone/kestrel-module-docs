@@ -114,7 +114,7 @@ const ModuleInfo: FC<{
       )}
 
       <div className="h-10" />
-      <div className="flex flex-col gap-y-6">
+      <div className="flex flex-col gap-y-8">
         {moduleDoc.items.map((item) => viewItem(item))}
       </div>
     </div>
