@@ -50,8 +50,8 @@ const showVariants = (variants: Variant[]) => {
       const args = variant.args.map((arg) => arg).join(", ");
       return `${variant.name}(${args})`;
     })
-    .map((v) => `  ${v}`)
-    .join(",\n");
+    .map((v) => `  ${v},`)
+    .join("\n");
 };
 
 const Name: FC<{ name: string }> = ({ name }) => (
