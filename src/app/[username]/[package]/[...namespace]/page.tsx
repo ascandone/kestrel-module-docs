@@ -29,7 +29,15 @@ const ItemCard: FC<{
 };
 
 const TypeDoc: FC<{ item: Item & { type: "adt" } }> = ({ item }) => {
-  return <ItemCard docComment={item.docComment}>type {item.name}</ItemCard>;
+  const hasParams = item.params.length !== 0;
+  const params = hasParams ? `<${item.params.join(", ")}>` : null;
+
+  return (
+    <ItemCard docComment={item.docComment}>
+      type {item.name}
+      {params}
+    </ItemCard>
+  );
 };
 
 const ValueDoc: FC<{ item: Item & { type: "value" } }> = ({ item }) => {
