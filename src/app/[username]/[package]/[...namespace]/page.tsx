@@ -12,7 +12,9 @@ const ItemCard: FC<{
       <h2
         className={`
         text-pink-800 font-sans font-medium
-          pl-2 py-1 rounded-sm border-l-4 border-pink-800 bg-gradient-to-r from-pink-200 to-pink-50/50
+          pl-2 py-1 rounded-sm border-l-4 border-pink-800
+          bg-gradient-to-r from-pink-200 to-pink-50/50
+          shadow shadow-pink-400/20
         `}
       >
         <pre className="whitespace-pre-wrap">{children}</pre>
@@ -21,7 +23,13 @@ const ItemCard: FC<{
       <div className="h-3" />
 
       {docComment === undefined ? null : (
-        <div className="px-1 prose prose-h1:text-xl prose-h2:text-xl prose-h1:leading-3  prose-h2:leading-3 prose-h3:leading-3">
+        <div
+          className={`
+        px-1 prose
+        prose-h1:text-xl prose-h2:text-xl prose-h1:leading-3 prose-h2:leading-3 prose-h3:leading-3
+        prose-pre:bg-zinc-900
+        `}
+        >
           <Markdown>{docComment}</Markdown>
         </div>
       )}
