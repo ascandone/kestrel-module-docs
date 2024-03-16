@@ -20,7 +20,7 @@ const ItemCard: FC<{
       <div className="h-3" />
 
       {docComment === undefined ? null : (
-        <div className="px-2 prose prose-h1:text-xl prose-h2:text-xl prose-h1:leading-3  prose-h2:leading-3 prose-h3:leading-3">
+        <div className="px-1 prose prose-h1:text-xl prose-h2:text-xl prose-h1:leading-3  prose-h2:leading-3 prose-h3:leading-3">
           <Markdown>{docComment}</Markdown>
         </div>
       )}

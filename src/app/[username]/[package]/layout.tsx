@@ -11,7 +11,7 @@ type Params = {
 const TopMenu: FC<{ params: Params }> = ({
   params: { username, package: package_ },
 }) => (
-  <div className="md:hidden px-4 py-2 border shadow-sm flex gap-x-4 items-center justify-between">
+  <div className="md:hidden px-4 py-3 border shadow-sm flex gap-x-4 items-center justify-between">
     <h3>
       <Link
         href={`/${username}/${package_}`}
@@ -48,7 +48,7 @@ export default async function Layout({
           username={username}
         />
       </div>
-      <main className="col-span-8 md:ml-64 px-6 py-4 max-w-screen-md mx-auto">
+      <main className="col-span-8 md:ml-64 px-4 py-4 max-w-screen-md mx-auto">
         {children}
       </main>
     </>
