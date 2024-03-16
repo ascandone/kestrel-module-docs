@@ -84,7 +84,7 @@ const ValueDoc: FC<{ item: Item & { type: "value" } }> = ({ item }) => {
 
   return (
     <ItemCard docComment={item.docComment} id={item.name}>
-      <Name name={item.name} /> : {item.signature}
+      <Name name={name} /> : {item.signature}
     </ItemCard>
   );
 };
