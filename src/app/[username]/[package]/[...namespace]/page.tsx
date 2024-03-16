@@ -28,17 +28,17 @@ const ItemCard: FC<{
   );
 };
 
-const TypeDoc: FC<{ type: Item & { type: "adt" } }> = ({ type }) => {
-  return <ItemCard docComment={type.docComment}>type {type.name}</ItemCard>;
+const TypeDoc: FC<{ item: Item & { type: "adt" } }> = ({ item }) => {
+  return <ItemCard docComment={item.docComment}>type {item.name}</ItemCard>;
 };
 
-const ValueDoc: FC<{ type: Item & { type: "value" } }> = ({ type }) => {
-  const needsParens = !/[a-z]/.test(type.name[0]);
-  const name = needsParens ? `(${type.name})` : type.name;
+const ValueDoc: FC<{ item: Item & { type: "value" } }> = ({ item }) => {
+  const needsParens = !/[a-z]/.test(item.name[0]);
+  const name = needsParens ? `(${item.name})` : item.name;
 
   return (
-    <ItemCard docComment={type.docComment}>
-      let {name}: {type.signature}
+    <ItemCard docComment={item.docComment}>
+      let {name}: {item.signature}
     </ItemCard>
   );
 };
@@ -46,9 +46,9 @@ const ValueDoc: FC<{ type: Item & { type: "value" } }> = ({ type }) => {
 function viewItem(item: Item): JSX.Element {
   switch (item.type) {
     case "adt":
-      return <TypeDoc key={`adt-${item.name}`} type={item} />;
+      return <TypeDoc key={`adt-${item.name}`} item={item} />;
     case "value":
-      return <ValueDoc key={`value-${item.name}`} type={item} />;
+      return <ValueDoc key={`value-${item.name}`} item={item} />;
   }
 }
 
