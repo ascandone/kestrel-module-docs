@@ -33,9 +33,12 @@ const TypeDoc: FC<{ type: Item & { type: "adt" } }> = ({ type }) => {
 };
 
 const ValueDoc: FC<{ type: Item & { type: "value" } }> = ({ type }) => {
+  const needsParens = !/[a-z]/.test(type.name[0]);
+  const name = needsParens ? `(${type.name})` : type.name;
+
   return (
     <ItemCard docComment={type.docComment}>
-      let {type.name}: {type.signature}
+      let {name}: {type.signature}
     </ItemCard>
   );
 };
