@@ -14,7 +14,7 @@ export default async function Home(props: { params: Params }) {
   ).then((r) => r.text());
 
   return (
-    <div className="prose prose-lg">
+    <div className="prose">
       <Markdown>{readme}</Markdown>
     </div>
   );
