@@ -87,7 +87,7 @@ const ModuleInfo: FC<{
   moduleDoc: ModuleDoc;
 }> = ({ moduleDoc }) => {
   return (
-    <div className="max-w-screen-md mx-auto px-4 py-4">
+    <div>
       <h1 className="text-4xl text-pink-800 font-bold font-mono">
         {moduleDoc.moduleName}
       </h1>

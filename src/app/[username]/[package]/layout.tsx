@@ -48,7 +48,9 @@ export default async function Layout({
           username={username}
         />
       </div>
-      <main className="col-span-8 md:ml-64 px-6 py-2">{children}</main>
+      <main className="col-span-8 md:ml-64 px-6 py-4 max-w-screen-md mx-auto">
+        {children}
+      </main>
     </>
   );
 }
