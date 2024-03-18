@@ -13,8 +13,7 @@ const ItemCard: FC<{
         className={`
         text-pink-800 font-sans font-medium
           pl-2 py-1 rounded-sm border-l-4 border-pink-800
-          bg-gradient-to-r from-pink-200 to-pink-50/50
-          shadow shadow-pink-400/20
+          bg-gradient-to-r from-pink-200 to-pink-50/10
         `}
       >
         <pre className="whitespace-pre-wrap">{children}</pre>
