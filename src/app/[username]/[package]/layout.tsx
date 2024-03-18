@@ -12,11 +12,12 @@ type Params = {
   package: string;
 };
 
-const TopMenu: FC<{ params: Params; version: string }> = ({
-  params: { username, package: package_ },
-  version,
-}) => (
-  <div className="md:hidden px-4 py-3 border shadow-sm flex gap-x-4 items-center justify-between">
+const TopMenu: FC<{
+  params: Params;
+  version: string;
+  onToggleOpened: VoidFunction;
+}> = ({ params: { username, package: package_ }, version, onToggleOpened }) => (
+  <div className="z-10 md:hidden px-4 py-3 _border _shadow-sm flex gap-x-4 items-center justify-between">
     <h3>
       <Link
         href={`/${username}/${package_}`}
@@ -27,7 +28,9 @@ const TopMenu: FC<{ params: Params; version: string }> = ({
       <span className="text-sm text-gray-600">{version}</span>
     </h3>
 
-    <Bars3Icon className="h-6" />
+    <button onClick={onToggleOpened}>
+      <Bars3Icon className="h-6" />
+    </button>
   </div>
 );
 
@@ -42,6 +45,7 @@ export default function Layout({
   params: Params;
   children: ReactNode;
 }) {
+  const [opened, setOpened] = useState(false);
   const { isLoading, error, data } = useSWR<ProjectDoc>(
     `https://raw.githubusercontent.com/${username}/${package_}/main/docs.json`,
     fetcher
@@ -61,14 +65,24 @@ export default function Layout({
       <TopMenu
         params={{ username, package: package_ }}
         version={data.version}
+        onToggleOpened={() => {
+          setOpened(!opened);
+        }}
       />
 
-      <div className="fixed w-60 transition-transform duration-200 ease-in-out -translate-x-full md:-translate-x-0">
+      <div
+        className={`
+          fixed top-0 w-60 transition-transform duration-200 ease-in-out
+          ${opened ? "" : "-translate-x-full"}
+          md:-translate-x-0
+        `}
+      >
         <ModulesSideBar
           modules={modules}
           package_={package_}
           username={username}
           version={data.version}
+          onClickedLink={() => setOpened(false)}
         />
       </div>
       <main className="col-span-8 md:ml-64 px-4 py-4 max-w-screen-md mx-auto">

@@ -8,8 +8,9 @@ export const ModulesSideBar: FC<{
   package_: string;
   modules: string[];
   version: string;
-}> = ({ modules, username, package_, version }) => (
-  <div className="py-4 px-4 overflow-y-auto h-screen bg-white border shadow _md:shadow-none">
+  onClickedLink: VoidFunction;
+}> = ({ modules, username, package_, version, onClickedLink }) => (
+  <div className="py-3 px-4 overflow-y-auto h-screen bg-white shadow border-r-gray-200 z-50">
     <h3>
       <Link
         href={`/${username}/${package_}`}
@@ -25,6 +26,7 @@ export const ModulesSideBar: FC<{
       {modules.map((module) => (
         <li key={module}>
           <Link
+            onClick={onClickedLink}
             href={`/${username}/${package_}/${module}`}
             className="text-pink-800 font-semibold text-mono"
           >
