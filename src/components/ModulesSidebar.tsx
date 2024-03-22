@@ -3,8 +3,7 @@
 import { FC } from "react";
 import Link from "next/link";
 
-const linkCls =
-  "text-pink-800 font-semibold text-mono hover:underline active:bg-red-500";
+const linkCls = "text-pink-800 font-semibold text-mono hover:underline";
 
 export const ModulesSideBar: FC<{
   username: string;
