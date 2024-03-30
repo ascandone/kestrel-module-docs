@@ -1,6 +1,9 @@
+"use client";
+
 import { FC, ReactNode } from "react";
 import Markdown from "react-markdown";
 import type { Item, ModuleDoc, Variant } from "kestrel-lang";
+import useSWR from "swr";
 
 const ItemCard: FC<{
   id: string;
@@ -126,15 +129,30 @@ type Params = {
   namespace: string[];
 };
 
-export default async function Page({ params }: { params: Params }) {
+const fetcher = (...args: any[]) =>
+  // @ts-ignore
+  fetch(...args).then((x) => x.json());
+
+export default function Page({ params }: { params: Params }) {
   const { namespace, username, package: package_ } = params;
 
-  const project = await fetch(
-    `https://raw.githubusercontent.com/${username}/${package_}/main/docs.json`
-  ).then((r) => r.json());
+  const { isLoading, error, data } = useSWR<any>(
+    `https://raw.githubusercontent.com/${username}/${package_}/main/docs.json`,
+    fetcher
+  );
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error || !data) {
+    console.log(error);
+    return <div className="p-4">Error</div>;
+  }
 
   const ns = namespace.join("/");
-  const module = project.modules[ns];
+  const module = data.modules[ns];
+
   if (module === undefined) {
     return <div>Not found</div>;
   }
