@@ -72,7 +72,7 @@ export default function Layout({
 
       <div
         className={`
-          fixed top-0 w-60 transition-transform duration-200 ease-in-out
+          fixed top-0 w-60 transition-transform duration-300 ease-in-out
           ${opened ? "" : "-translate-x-full"}
           md:-translate-x-0
         `}
@@ -85,7 +85,7 @@ export default function Layout({
           onClickedLink={() => setOpened(false)}
         />
       </div>
-      <main className="col-span-8 md:ml-64 px-4 py-4 max-w-screen-md mx-auto">
+      <main className="col-span-8 md:ml-64 px-3 py-4 max-w-screen-md mx-auto">
         {children}
       </main>
     </>

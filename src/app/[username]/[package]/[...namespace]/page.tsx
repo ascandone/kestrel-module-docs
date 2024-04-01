@@ -27,9 +27,12 @@ const ItemCard: FC<{
       {docComment === undefined ? null : (
         <div
           className={`
-        px-1 prose
+        px-3 border-l
+        prose
+        prose-code:before:hidden prose-code:after:hidden
         prose-h1:text-xl prose-h2:text-xl prose-h1:leading-3 prose-h2:leading-3 prose-h3:leading-3
         prose-pre:bg-zinc-900
+        max-w-screen-lg mx-auto
         `}
         >
           <Markdown>{docComment}</Markdown>
