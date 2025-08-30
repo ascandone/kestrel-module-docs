@@ -1,7 +1,6 @@
 import { FC, ReactNode } from "react";
-import Markdown from "react-markdown";
 import type { Item, ModuleDoc, Variant } from "kestrel-lang";
-import { SyntaxHighlighter } from "@/components/Highlight";
+import { Markdown } from "@/components/Markdown";
 
 const ItemCard: FC<{
   id: string;
@@ -30,26 +29,7 @@ const ItemCard: FC<{
         prose-pre:transparent prose-pre:m-0 prose-pre:p-0
         `}
         >
-          <Markdown
-            components={{
-              code(props) {
-                const { children, className, node, ...rest } = props;
-                const match = /language-(\w+)/.exec(className || "");
-                return match ? (
-                  <SyntaxHighlighter
-                    language={match[1]}
-                    code={String(children).replace(/\n$/, "")}
-                  />
-                ) : (
-                  <code {...rest} className={className}>
-                    {children}
-                  </code>
-                );
-              },
-            }}
-          >
-            {docComment}
-          </Markdown>
+          <Markdown>{docComment}</Markdown>
         </div>
       )}
     </div>

@@ -5,9 +5,7 @@ import { atomOneDark } from "react-syntax-highlighter/dist/esm/styles/hljs";
 SyntaxHighlighterBase.registerLanguage("kestrel", (hljs: any) => {
   const KEYWORDS = {
     className: "keyword",
-    beginKeywords:
-      "as assert auto case const delegate derive echo else fn if " +
-      "implement import let macro opaque panic pub test todo type use",
+    beginKeywords: "match if else fn let pub type struct enum import",
   };
   const STRING = {
     className: "string",
@@ -15,11 +13,7 @@ SyntaxHighlighterBase.registerLanguage("kestrel", (hljs: any) => {
     contains: [hljs.BACKSLASH_ESCAPE],
     relevance: 0,
   };
-  const NAME = {
-    className: "variable",
-    begin: "\\b[a-z][a-z0-9_]*\\b",
-    relevance: 0,
-  };
+
   const DISCARD_NAME = {
     className: "comment",
     begin: "\\b_[a-z][a-z0-9_]*\\b",
@@ -54,45 +48,12 @@ SyntaxHighlighterBase.registerLanguage("kestrel", (hljs: any) => {
     contains: [
       hljs.C_LINE_COMMENT_MODE,
       STRING,
-      {
-        // bit array
-        begin: "<<",
-        end: ">>",
-        contains: [
-          {
-            className: "keyword",
-            beginKeywords:
-              "binary bits bytes int float bit_string bit_array bits utf8 utf16 " +
-              "utf32 utf8_codepoint utf16_codepoint utf32_codepoint signed " +
-              "unsigned big little native unit size",
-          },
-          KEYWORDS,
-          STRING,
-          NAME,
-          DISCARD_NAME,
-          NUMBER,
-        ],
-        relevance: 10,
-      },
-      {
-        className: "function",
-        beginKeywords: "fn",
-        end: "\\(",
-        excludeEnd: true,
-        contains: [
-          {
-            className: "title",
-            begin: "[a-z][a-z0-9_]*\\w*",
-            relevance: 0,
-          },
-        ],
-      },
-      {
-        className: "attribute",
-        begin: "@",
-        end: "\\(",
-        excludeEnd: true,
-      },
+      // {
+      //   className: "attribute",
+      //   begin: "@",
+      //   end: "\\(",
+      //   excludeEnd: true,
+      // },
       KEYWORDS,
       {
         // Type names and constructors
@@ -105,7 +66,11 @@ SyntaxHighlighterBase.registerLanguage("kestrel", (hljs: any) => {
         begin: "[+\\-*/%!=<>&|.]+",
         relevance: 0,
       },
-      NAME,
+      // {
+      //   className: "variable",
+      //   begin: "\\b[a-z][a-z0-9_]*\\b",
+      //   relevance: 0,
+      // },
       DISCARD_NAME,
       NUMBER,
     ],
@@ -115,7 +80,13 @@ SyntaxHighlighterBase.registerLanguage("kestrel", (hljs: any) => {
 export const SyntaxHighlighter: FC<{ language: string; code: string }> = ({
   code,
 }) => (
-  <SyntaxHighlighterBase PreTag="div" style={atomOneDark}>
+  <SyntaxHighlighterBase
+    PreTag="div"
+    style={atomOneDark}
+    customStyle={{
+      backgroundColor: "#1e1e1e",
+    }}
+  >
     {code}
   </SyntaxHighlighterBase>
 );

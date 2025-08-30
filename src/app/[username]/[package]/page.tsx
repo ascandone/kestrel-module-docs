@@ -1,6 +1,6 @@
 "use client";
 
-import Markdown from "react-markdown";
+import { Markdown } from "@/components/Markdown";
 import useSWR from "swr";
 
 const fetcher = (...args: any[]) =>
@@ -28,9 +28,5 @@ export default function Home(props: { params: Params }) {
     return <div className="p-4">Error</div>;
   }
 
-  return (
-    <div className="prose">
-      <Markdown>{data}</Markdown>
-    </div>
-  );
+  return <Markdown>{data}</Markdown>;
 }
