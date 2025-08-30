@@ -1,9 +1,9 @@
 "use client";
 
 import { FC, ReactNode } from "react";
-import Markdown from "react-markdown";
 import type { Item, ModuleDoc, Variant } from "kestrel-lang";
 import useSWR from "swr";
+import { Markdown } from "@/components/Markdown";
 
 const ItemCard: FC<{
   id: string;
@@ -35,6 +35,8 @@ const ItemCard: FC<{
         prose-h1:text-xl prose-h2:text-xl prose-h1:leading-3 prose-h2:leading-3 prose-h3:leading-3
         prose-pre:bg-zinc-900
         max-w-screen-lg mx-auto
+        rounded-none
+        prose-pre:transparent prose-pre:m-0 prose-pre:p-0
         `}
         >
           <Markdown>{docComment}</Markdown>
