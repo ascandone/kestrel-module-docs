@@ -8,15 +8,19 @@ import type { ProjectDoc } from "kestrel-lang";
 import useSWR from "swr";
 
 type Params = {
-  username: string;
   package: string;
+  version: string;
 };
 
 const TopMenu: FC<{
   params: Params;
   version: string;
   onToggleOpened: VoidFunction;
-}> = ({ params: { username, package: package_ }, version, onToggleOpened }) => (
+}> = ({
+  params: { version: username, package: package_ },
+  version,
+  onToggleOpened,
+}) => (
   <div className="z-10 md:hidden px-4 py-3 _border _shadow-sm flex gap-x-4 items-center justify-between">
     <h3>
       <Link
@@ -39,7 +43,7 @@ const fetcher = (...args: any[]) =>
   fetch(...args).then((x) => x.json());
 
 export default function Layout({
-  params: { package: package_, username },
+  params: { package: package_, version },
   children,
 }: {
   params: Params;
@@ -47,7 +51,8 @@ export default function Layout({
 }) {
   const [opened, setOpened] = useState(false);
   const { isLoading, error, data } = useSWR<ProjectDoc>(
-    `https://raw.githubusercontent.com/${username}/${package_}/main/docs.json`,
+    // `https://raw.githubusercontent.com/${username}/${package_}/main/docs.json`,
+    `https://raw.githubusercontent.com/ascandone/kestrel-packages/refs/heads/main/kestrel_core/0.0.1/docs.json`,
     fetcher
   );
   if (isLoading) {
@@ -63,7 +68,7 @@ export default function Layout({
   return (
     <>
       <TopMenu
-        params={{ username, package: package_ }}
+        params={{ version: version, package: package_ }}
         version={data.version}
         onToggleOpened={() => {
           setOpened(!opened);
@@ -80,7 +85,6 @@ export default function Layout({
         <ModulesSideBar
           modules={modules}
           package_={package_}
-          username={username}
           version={data.version}
           onClickedLink={() => setOpened(false)}
         />

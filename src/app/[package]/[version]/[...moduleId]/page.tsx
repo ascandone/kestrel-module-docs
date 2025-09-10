@@ -131,7 +131,6 @@ const ModuleInfo: FC<{
 };
 
 type Params = {
-  username: string;
   package: string;
   moduleId: string[];
 };
@@ -141,10 +140,11 @@ const fetcher = (...args: any[]) =>
   fetch(...args).then((x) => x.json());
 
 export default function Page({ params }: { params: Params }) {
-  const { moduleId, username, package: package_ } = params;
+  const { moduleId, package: package_ } = params;
 
   const { isLoading, error, data } = useSWR<any>(
-    `https://raw.githubusercontent.com/${username}/${package_}/main/docs.json`,
+    // `https://raw.githubusercontent.com/${username}/${package_}/main/docs.json`,
+    `https://raw.githubusercontent.com/ascandone/kestrel-packages/refs/heads/main/kestrel_core/0.0.1/docs.json`,
     fetcher
   );
 

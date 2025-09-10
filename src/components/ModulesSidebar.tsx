@@ -6,16 +6,15 @@ import Link from "next/link";
 const linkCls = "text-pink-800 font-semibold text-mono hover:underline";
 
 export const ModulesSideBar: FC<{
-  username: string;
   package_: string;
-  modules: string[];
   version: string;
+  modules: string[];
   onClickedLink: VoidFunction;
-}> = ({ modules, username, package_, version, onClickedLink }) => (
+}> = ({ modules, package_, version, onClickedLink }) => (
   <div className="py-3 px-4 overflow-y-auto h-screen bg-white shadow border-r-gray-200 z-50">
     <h3>
       <Link
-        href={`/${username}/${package_}`}
+        href={`/${package_}/${version}`}
         className="text-pink-800 font-semibold text-mono"
       >
         {package_}
@@ -28,21 +27,21 @@ export const ModulesSideBar: FC<{
       <li>
         <Link
           onClick={onClickedLink}
-          href={`/${username}/${package_}`}
+          href={`/${package_}/${version}`}
           className={linkCls}
         >
           README
         </Link>
       </li>
-      <li>
+      {/* <li>
         <a
           target="_blank"
-          href={`https://github.com/${username}/${package_}`}
+          href={`https://github.com/${package_}/${version}`}
           className={linkCls}
         >
           Source
         </a>
-      </li>
+      </li> */}
     </ul>
 
     <h2 className="font-bold text-gray-900 text-lg">Modules</h2>
@@ -51,7 +50,7 @@ export const ModulesSideBar: FC<{
         <li key={module}>
           <Link
             onClick={onClickedLink}
-            href={`/${username}/${package_}/${module}`}
+            href={`/${package_}/${version}/${module}`}
             className={linkCls}
           >
             {module}

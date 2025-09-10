@@ -16,7 +16,8 @@ export default function Home(props: { params: Params }) {
   const { username, package: package_ } = props.params;
 
   const { isLoading, error, data } = useSWR<string>(
-    `https://raw.githubusercontent.com/${username}/${package_}/main/README.md`,
+    // `https://raw.githubusercontent.com/${username}/${package_}/main/README.md`,
+    `https://raw.githubusercontent.com/ascandone/kestrel-packages/refs/heads/main/kestrel_core/0.0.1/README.md`,
     fetcher
   );
 
