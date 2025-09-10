@@ -133,7 +133,7 @@ const ModuleInfo: FC<{
 type Params = {
   username: string;
   package: string;
-  namespace: string[];
+  moduleId: string[];
 };
 
 const fetcher = (...args: any[]) =>
@@ -141,7 +141,7 @@ const fetcher = (...args: any[]) =>
   fetch(...args).then((x) => x.json());
 
 export default function Page({ params }: { params: Params }) {
-  const { namespace, username, package: package_ } = params;
+  const { moduleId, username, package: package_ } = params;
 
   const { isLoading, error, data } = useSWR<any>(
     `https://raw.githubusercontent.com/${username}/${package_}/main/docs.json`,
@@ -157,7 +157,7 @@ export default function Page({ params }: { params: Params }) {
     return <div className="p-4">Error</div>;
   }
 
-  const ns = namespace.join("/");
+  const ns = moduleId.join("/");
   const module = data.modules[ns];
 
   if (module === undefined) {
